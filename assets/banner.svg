@@ -1,0 +1,69 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f1a"/>
+      <stop offset="55%" stop-color="#111a2e"/>
+      <stop offset="100%" stop-color="#0b0f1a"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="45%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+      <animate attributeName="x1" values="0%;100%;0%" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="100%;200%;100%" dur="8s" repeatCount="indefinite"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <circle cx="180" cy="150" r="160" fill="url(#glow)"/>
+  <circle cx="1030" cy="130" r="180" fill="url(#glow)"/>
+
+  <!-- circuit grid lines -->
+  <g stroke="#22304d" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="60" x2="1200" y2="60"/>
+    <line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="120" y1="0" x2="120" y2="300"/>
+    <line x1="1080" y1="0" x2="1080" y2="300"/>
+  </g>
+
+  <!-- floating nodes representing agent tools -->
+  <g fill="#7dd3fc">
+    <circle cx="120" cy="60" r="4">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1080" cy="60" r="4">
+      <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="120" cy="240" r="4">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1080" cy="240" r="4">
+      <animate attributeName="opacity" values="1;0.4;1" dur="2.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- bracket motif -->
+  <text x="60" y="178" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="90" fill="#22304d" font-weight="700">&lt;</text>
+  <text x="1085" y="178" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="90" fill="#22304d" font-weight="700">/&gt;</text>
+
+  <!-- title -->
+  <text x="600" y="150" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="72" font-weight="800" fill="url(#titleGrad)" letter-spacing="2">KIO.ai</text>
+
+  <!-- blinking cursor -->
+  <rect x="742" y="102" width="10" height="56" fill="#a78bfa">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- subtitle -->
+  <text x="600" y="195" text-anchor="middle" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" fill="#93a4c3" letter-spacing="1">AI Coding Agent &#8226; Skill &amp; Tool Router &#8226; Workspace Automation</text>
+
+  <!-- underline shimmer -->
+  <rect x="380" y="215" width="440" height="2" fill="url(#titleGrad)"/>
+</svg>
