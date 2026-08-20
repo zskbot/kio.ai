@@ -197,7 +197,7 @@ Chủ dự án · Thiết kế & phát triển KIO.ai
 
 <div align="center">
 
-<img src="assets/brand/v2_1787261625828-304643894.png" alt="KIO AI Logo" width="480"/>
+<img src="assets/brand/v2_1787261759703-881718904.png" alt="KIO AI Logo" width="480"/>
 
 # KIO AI
 ### Build Beyond Limits.
@@ -242,7 +242,7 @@ Bộ nhận diện đầy đủ bao gồm: logo chính, logo biểu tượng, lo
 ## 🏢 Ứng dụng thương hiệu (Brand Applications)
 
 <div align="center">
-<img src="assets/brand/v2_1787261759703-881718904.png" alt="KIO AI Brand Applications" width="900"/>
+<img src="assets/brand/v2_1787261625828-304643894.png" alt="KIO AI Brand Applications" width="900"/>
 </div>
 
 Hình ảnh minh họa mascot và logo KIO AI trên các nền tảng thực tế: giao diện web/app, thẻ nhân viên (badge), và biển hiệu tòa nhà.
@@ -252,7 +252,7 @@ Hình ảnh minh họa mascot và logo KIO AI trên các nền tảng thực t�
 ## 🔤 Hệ thống Logo (Logo System)
 
 <div align="center">
-<img src="assets/brand/v2_1787261625828-304643894.png" alt="KIO AI Logo System" width="700"/>
+<img src="assets/brand/v2_1787261759703-881718904.png" alt="KIO AI Logo System" width="700"/>
 </div>
 
 | Loại | Mô tả |
