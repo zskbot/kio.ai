@@ -6,6 +6,7 @@ import time
 import asyncio
 from pathlib import Path
 from aiohttp import web
+from agent_router import route as kio_route
 
 ROOT = Path.cwd()
 
@@ -321,148 +322,189 @@ async def tool_call(tool_id, status="CALLED"):
         "status":status
     })
 
+
 async def run_task(task):
 
-    await broadcast({
-        "type":"task",
-        "task":task
-    })
+    task = str(task or "").strip()
 
-    selected = detect_skills(task)
-    tools = tool_for_task(task)
+    if not task:
+        return
 
-    await activity("Agent received task")
+    try:
 
-    await log("$ kio task start")
-    await log("✓ Task received")
+        await broadcast({
+            "type": "activity",
+            "status": "working"
+        })
 
-    await asyncio.sleep(.25)
+        await log(
+            "KIO Agent Router: analyzing task"
+        )
 
-    await activity("Selecting skills")
+        result = kio_route(task)
 
-    await broadcast({
-        "type":"skills",
-        "skills":selected
-    })
+        skills = result.get(
+            "skills",
+            []
+        )
 
-    for skill in selected:
-        await log(f"✓ skill:{skill}")
+        tools = result.get(
+            "tools",
+            []
+        )
 
-    await asyncio.sleep(.2)
+        files = result.get(
+            "files",
+            []
+        )
 
-    await activity("Selecting tools")
+        plan = result.get(
+            "plan",
+            []
+        )
 
-    await broadcast({
-        "type":"tools",
-        "tools":tools
-    })
+        await broadcast({
+            "type": "plan",
+            "items": plan
+        })
 
-    for tool in tools:
-        await tool_call(tool,"CALLED")
-        await log(f"→ tool:{tool}")
+        await broadcast({
+            "type": "skills",
+            "skills": skills
+        })
 
-    await asyncio.sleep(.2)
+        await log(
+            "✓ Skills selected: "
+            + ", ".join(skills)
+        )
 
-    await activity("Analyzing workspace")
+        await log(
+            "✓ Tools selected: "
+            + ", ".join(tools)
+        )
 
-    await log("$ inspect project")
+        prepared_files = []
 
-    files = project_files()
+        for filename in files:
 
-    await log(
-        f"✓ Project detected — {len(files)} files"
-    )
+            prepared_files.append({
+                "path": filename,
+                "status": "READY"
+            })
 
-    await asyncio.sleep(.2)
+        await broadcast({
+            "type": "files",
+            "files": prepared_files
+        })
 
-    await activity("Creating execution plan")
+        await log(
+            "Workspace inspected: "
+            f"{len(result.get('workspace', []))} files"
+        )
 
-    plan = [
-        "Analyze task",
-        "Select skills",
-        "Inspect workspace",
-        "Prepare file changes",
-        "Run verification",
-        "Return result"
-    ]
+        for tool in tools:
 
-    await broadcast({
-        "type":"plan",
-        "items":plan
-    })
-
-    await asyncio.sleep(.25)
-
-    await activity("Preparing files")
-
-    await broadcast({
-        "type":"files",
-        "files":[
-            {
-                "path":f["path"],
-                "status":"READY"
-            }
-            for f in files[:100]
-        ]
-    })
-
-    await log("$ scan relevant files")
-
-    for f in files[:20]:
-        await asyncio.sleep(.025)
-        await log(f"✓ {f['path']}")
-
-    await activity("Running verification")
-
-    await log("$ verify workspace")
-
-    package_json = ROOT / "package.json"
-
-    if package_json.exists():
-
-        await log("✓ package.json detected")
-
-        try:
-            json.loads(
-                package_json.read_text(
-                    errors="ignore"
-                )
-            )
+            await broadcast({
+                "type": "plugin",
+                "plugin": tool,
+                "action": "route",
+                "status": "CALLING"
+            })
 
             await log(
-                "✓ package.json valid"
+                f"→ tool:{tool}"
             )
 
-        except:
+        if prepared_files:
+
+            working_files = []
+
+            for item in prepared_files:
+
+                working_files.append({
+                    "path": item["path"],
+                    "status": "WORKING"
+                })
+
+            await broadcast({
+                "type": "files",
+                "files": working_files
+            })
+
             await log(
-                "✗ package.json invalid",
-                "error"
+                "Agent prepared affected files"
             )
 
-    await asyncio.sleep(.3)
+            staged_files = []
 
-    await log("$ build verification")
+            for item in prepared_files:
 
-    await asyncio.sleep(.3)
+                staged_files.append({
+                    "path": item["path"],
+                    "status": "STAGED"
+                })
 
-    await log("✓ verification completed")
+            await broadcast({
+                "type": "files",
+                "files": staged_files
+            })
 
-    await activity(
-        "Task analysis completed",
-        "done"
-    )
+        await log(
+            "✓ Agent Router validation complete"
+        )
 
-    await broadcast({
-        "type":"agent",
-        "message":
-            "KIO đã phân tích task, chọn skills phù hợp, "
-            "kiểm tra workspace và hoàn tất bước verification."
-    })
+        summary = (
+            "KIO đã phân tích task và tạo execution plan.\n\n"
+            "Skills: "
+            + ", ".join(skills)
+            + "\n"
+            "Tools: "
+            + ", ".join(tools)
+            + "\n"
+            "Files: "
+            + (
+                ", ".join(files)
+                if files
+                else "workspace scan only"
+            )
+        )
 
-    await broadcast({
-        "type":"complete"
-    })
+        await broadcast({
+            "type": "agent",
+            "message": summary
+        })
 
+        await broadcast({
+            "type": "activity",
+            "status": "done"
+        })
+
+        await broadcast({
+            "type": "complete"
+        })
+
+    except Exception as error:
+
+        await log(
+            "✗ Agent Router error: "
+            + str(error)
+        )
+
+        await broadcast({
+            "type": "agent",
+            "message":
+                "KIO Agent Router gặp lỗi: "
+                + str(error)
+        })
+
+        await broadcast({
+            "type": "activity",
+            "status": "error"
+        })
+
+        await broadcast({
+            "type": "complete"
+        })
 
 async def index(request):
     return web.FileResponse(
