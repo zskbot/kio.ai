@@ -1,0 +1,29 @@
+name: Publish to Hugging Face
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write  # required so the job can request an OIDC token
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the hf CLI
+        run: |
+          curl -LsSf https://hf.co/cli/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Upload checkpoint
+        env:
+          # The HF repo to publish to. For non-model repos, prefix accordingly:
+          #   datasets/acme/awesome-dataset, spaces/acme/awesome-space, kernels/acme/awesome-kernel
+          HF_OIDC_RESOURCE: acme/awesome-model
+        run: hf upload acme/awesome-model ./checkpoint . --commit-message "Publish from ${GITHUB_SHA::7}"
