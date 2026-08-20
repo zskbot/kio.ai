@@ -1,0 +1,82 @@
+<svg width="1200" height="460" viewBox="0 0 1200 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#151d33"/>
+      <stop offset="100%" stop-color="#0f1526"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7dd3fc"/>
+    </marker>
+    <style>
+      .card { fill: url(#cardGrad); stroke: #2c3a5c; stroke-width: 1.5; rx: 14; }
+      .title { font-family: 'JetBrains Mono','Fira Code',monospace; font-size: 16px; font-weight: 700; fill: #e2e8f0; }
+      .sub { font-family: 'Segoe UI',Helvetica,Arial,sans-serif; font-size: 12.5px; fill: #93a4c3; }
+      .tag { font-family: 'JetBrains Mono',monospace; font-size: 11px; fill: #7dd3fc; }
+      .flow { stroke: #7dd3fc; stroke-width: 2; fill: none; marker-end: url(#arrow); opacity: 0.85; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="460" fill="#0b0f1a"/>
+
+  <!-- Step 1: Task input -->
+  <rect x="30" y="190" width="180" height="90" class="card"/>
+  <text x="50" y="222" class="tag">01</text>
+  <text x="50" y="245" class="title">User Task</text>
+  <text x="50" y="266" class="sub">"build a login page"</text>
+
+  <!-- Step 2: agent_router.py -->
+  <rect x="260" y="150" width="220" height="170" class="card"/>
+  <text x="280" y="182" class="tag">02</text>
+  <text x="280" y="205" class="title">agent_router.py</text>
+  <text x="280" y="228" class="sub">normalize(task)</text>
+  <text x="280" y="248" class="sub">score_rules(text, RULES)</text>
+  <text x="280" y="268" class="sub">select_skills()</text>
+  <text x="280" y="288" class="sub">select_tools()</text>
+
+  <!-- Step 3: workspace -->
+  <rect x="530" y="40" width="220" height="110" class="card"/>
+  <text x="550" y="72" class="tag">03a</text>
+  <text x="550" y="95" class="title">inspect_workspace()</text>
+  <text x="550" y="116" class="sub">scan project files</text>
+  <text x="550" y="134" class="sub">skip .git / node_modules</text>
+
+  <!-- Step 3b: choose files -->
+  <rect x="530" y="180" width="220" height="110" class="card"/>
+  <text x="550" y="212" class="tag">03b</text>
+  <text x="550" y="235" class="title">choose_files()</text>
+  <text x="550" y="256" class="sub">match by extension</text>
+  <text x="550" y="274" class="sub">priority: index.html, app.js…</text>
+
+  <!-- Step 3c: skills/tools table -->
+  <rect x="530" y="320" width="220" height="110" class="card"/>
+  <text x="550" y="352" class="tag">03c</text>
+  <text x="550" y="375" class="title">tools.json / skills</text>
+  <text x="550" y="396" class="sub">Terminal, Git, Build,</text>
+  <text x="550" y="414" class="sub">Deploy, GitHub, HTTP…</text>
+
+  <!-- Step 4: make_plan -->
+  <rect x="800" y="150" width="200" height="170" class="card"/>
+  <text x="820" y="182" class="tag">04</text>
+  <text x="820" y="205" class="title">make_plan()</text>
+  <text x="820" y="228" class="sub">1. Analyze task</text>
+  <text x="820" y="246" class="sub">2. Select skills/tools</text>
+  <text x="820" y="264" class="sub">3. Inspect workspace</text>
+  <text x="820" y="282" class="sub">4. Run + validate</text>
+  <text x="820" y="300" class="sub">5. Report result</text>
+
+  <!-- Step 5: result -->
+  <rect x="1040" y="190" width="140" height="90" class="card"/>
+  <text x="1058" y="222" class="tag">05</text>
+  <text x="1058" y="245" class="title">Agent Result</text>
+  <text x="1058" y="266" class="sub">JSON plan + files</text>
+
+  <!-- arrows -->
+  <path class="flow" d="M210,235 L258,235"/>
+  <path class="flow" d="M480,200 C505,150 505,110 528,95"/>
+  <path class="flow" d="M480,235 L528,235"/>
+  <path class="flow" d="M480,270 C505,310 505,350 528,375"/>
+  <path class="flow" d="M750,95 C780,95 780,180 798,205"/>
+  <path class="flow" d="M750,235 L798,235"/>
+  <path class="flow" d="M750,375 C780,375 780,290 798,265"/>
+  <path class="flow" d="M1000,235 L1038,235"/>
+</svg>
