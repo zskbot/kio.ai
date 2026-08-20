@@ -1,0 +1,72 @@
+[
+  {
+    "id":"terminal",
+    "name":"Terminal",
+    "category":"Core",
+    "icon":"⌘",
+    "description":"Run project commands through the KIO build console."
+  },
+  {
+    "id":"file-manager",
+    "name":"File Manager",
+    "category":"Core",
+    "icon":"◇",
+    "description":"Inspect project files and workspace structure."
+  },
+  {
+    "id":"code-search",
+    "name":"Code Search",
+    "category":"Core",
+    "icon":"⌕",
+    "description":"Search source files and locate relevant code."
+  },
+  {
+    "id":"build",
+    "name":"Build",
+    "category":"Build",
+    "icon":"▶",
+    "description":"Run project build and verification workflows."
+  },
+  {
+    "id":"test",
+    "name":"Test Runner",
+    "category":"Build",
+    "icon":"✓",
+    "description":"Run project tests and report failures."
+  },
+  {
+    "id":"git",
+    "name":"Git",
+    "category":"Developer",
+    "icon":"⑂",
+    "description":"Inspect repository state and prepare Git operations."
+  },
+  {
+    "id":"github",
+    "name":"GitHub",
+    "category":"Developer",
+    "icon":"◈",
+    "description":"Repository, issue and pull request integration."
+  },
+  {
+    "id":"deploy",
+    "name":"Deploy",
+    "category":"Developer",
+    "icon":"↑",
+    "description":"Prepare deployment workflows for supported platforms."
+  },
+  {
+    "id":"browser",
+    "name":"Browser",
+    "category":"Web",
+    "icon":"◎",
+    "description":"Web inspection and application verification tool."
+  },
+  {
+    "id":"http",
+    "name":"HTTP Client",
+    "category":"Web",
+    "icon":"↗",
+    "description":"Inspect APIs and HTTP endpoints."
+  }
+]

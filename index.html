@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1"
+>
+
+<meta
+name="theme-color"
+content="#090909"
+>
+
+<title>KIO.ai</title>
+
+<link
+rel="stylesheet"
+href="/style.css"
+>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<header class="topbar">
+
+<button
+id="menuBtn"
+class="icon-btn mobile-only"
+>
+☰
+</button>
+
+
+<div class="logo">
+
+<span class="logo-mark">
+K
+</span>
+
+<strong>
+KIO
+</strong>
+
+</div>
+
+
+<div
+id="pageTitle"
+class="session-title"
+>
+New session
+</div>
+
+
+<div class="top-actions">
+
+<button class="icon-btn">
+•••
+</button>
+
+</div>
+
+</header>
+
+
+<div class="layout">
+
+
+<!-- AGENT ACTIVITY -->
+
+<aside class="agent-panel">
+
+<div class="panel-header">
+
+<strong>
+Agent Activity
+</strong>
+
+<span id="agentStatus">
+IDLE
+</span>
+
+</div>
+
+
+<section class="activity-section">
+
+<div class="section-title">
+PLAN
+</div>
+
+<div
+id="plan"
+class="plan"
+>
+
+<div class="empty">
+Waiting for task
+</div>
+
+</div>
+
+</section>
+
+
+<section class="activity-section">
+
+<div class="section-title">
+SKILLS
+</div>
+
+<div
+id="activeSkills"
+class="active-skills"
+>
+
+<div class="empty">
+No skills selected
+</div>
+
+</div>
+
+</section>
+
+
+<section class="activity-section">
+
+<div class="section-title">
+FILES
+</div>
+
+<div
+id="files"
+class="files"
+>
+
+<div class="empty">
+No files selected
+</div>
+
+</div>
+
+</section>
+
+
+<section class="console-section">
+
+<div class="section-title console-title">
+BUILD COMMAND CONSOLE
+</div>
+
+<div
+id="console"
+class="console"
+>
+</div>
+
+</section>
+
+</aside>
+
+
+<!-- CENTER -->
+
+<main class="workspace">
+
+
+<!-- START -->
+
+<section
+id="startScreen"
+class="start-screen"
+>
+
+<div class="start-content">
+
+
+<div class="start-logo">
+K
+</div>
+
+
+<h1>
+What are you building?
+</h1>
+
+
+<p>
+Build, analyze and work with your project using KIO.
+</p>
+
+
+<form
+id="startForm"
+class="hero-composer"
+>
+
+
+<textarea
+id="startInput"
+rows="1"
+placeholder="Ask Kio to build something..."
+></textarea>
+
+
+<div class="composer-actions">
+
+
+<div class="tools">
+
+<button type="button">
+＋
+</button>
+
+<button type="button">
+Tools
+</button>
+
+<button type="button">
+Project
+</button>
+
+</div>
+
+
+<button
+class="send"
+type="submit"
+>
+↑
+</button>
+
+</div>
+
+</form>
+
+
+<div class="suggestions">
+
+
+<button
+data-task="Build a modern web application"
+>
+
+<strong>
+Build an application
+</strong>
+
+<span>
+Start a new project
+</span>
+
+</button>
+
+
+<button
+data-task="Analyze my project and find problems"
+>
+
+<strong>
+Analyze project
+</strong>
+
+<span>
+Inspect the workspace
+</span>
+
+</button>
+
+
+<button
+data-task="Find and fix errors in my project"
+>
+
+<strong>
+Fix my project
+</strong>
+
+<span>
+Find project problems
+</span>
+
+</button>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CHAT -->
+
+<section
+id="chatScreen"
+class="chat-screen"
+>
+
+<div
+id="messages"
+class="messages"
+>
+</div>
+
+
+<div class="chat-composer-wrap">
+
+
+<form
+id="chatForm"
+class="chat-composer"
+>
+
+<textarea
+id="chatInput"
+rows="1"
+placeholder="Ask Kio..."
+></textarea>
+
+
+<div class="composer-actions">
+
+
+<div class="tools">
+
+<button type="button">
+＋
+</button>
+
+<button type="button">
+Tools
+</button>
+
+<button type="button">
+Project
+</button>
+
+</div>
+
+
+<button
+class="send"
+type="submit"
+>
+↑
+</button>
+
+</div>
+
+</form>
+
+
+<div class="composer-note">
+KIO can make mistakes. Review important changes.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SKILLS PAGE -->
+
+<section
+id="skillsPage"
+class="management-page"
+>
+
+<div class="management-header">
+
+<div>
+
+<h2>
+Skills
+</h2>
+
+<p>
+Capabilities available to the KIO Agent.
+</p>
+
+</div>
+
+</div>
+
+
+<div
+id="skillsGrid"
+class="card-grid"
+>
+</div>
+
+</section>
+
+
+<!-- TOOLS PAGE -->
+
+<section
+id="toolsPage"
+class="management-page"
+>
+
+<div class="management-header">
+
+<div>
+
+<h2>Tools</h2>
+
+<p>
+Tools available to the KIO Agent.
+</p>
+
+</div>
+
+</div>
+
+<div
+id="toolsGrid"
+class="card-grid"
+>
+</div>
+
+</section>
+
+
+<!-- PLUGINS PAGE -->
+
+<section
+id="pluginsPage"
+class="management-page"
+>
+
+<div class="management-header">
+
+<div>
+
+<h2>
+Plugins
+</h2>
+
+<p>
+Connect external AI and developer tools to KIO.
+</p>
+
+</div>
+
+</div>
+
+
+<div
+id="pluginsGrid"
+class="card-grid"
+>
+</div>
+
+</section>
+
+
+</main>
+
+
+<!-- RIGHT -->
+
+<aside class="project-panel">
+
+
+<div class="panel-header">
+
+<strong>
+Workspace
+</strong>
+
+</div>
+
+
+<nav class="nav">
+
+<button
+class="nav-item active"
+data-page="chat"
+>
+<span>⌁</span>
+Chat
+</button>
+
+
+<button
+class="nav-item"
+data-page="skills"
+>
+<span>◇</span>
+Skills
+</button>
+
+
+<button
+class="nav-item"
+data-page="tools"
+>
+<span>⌘</span>
+Tools
+</button>
+
+<button
+class="nav-item"
+data-page="plugins"
+>
+<span>◆</span>
+Plugins
+</button>
+
+</nav>
+
+
+<div class="project-block">
+
+
+<div class="section-title">
+PROJECT
+</div>
+
+
+<div class="project-item active">
+
+<span>
+◆
+</span>
+
+<span>
+kio.ai
+</span>
+
+</div>
+
+</div>
+
+
+<div class="project-block">
+
+
+<div class="section-title">
+WORKSPACE
+</div>
+
+
+<div class="project-item">
+<span>⌂</span>
+Overview
+</div>
+
+
+<div class="project-item">
+<span>◇</span>
+Files
+</div>
+
+
+<div class="project-item">
+<span>⌘</span>
+Builds
+</div>
+
+</div>
+
+
+<div class="project-block">
+
+
+<div class="section-title">
+TASKS
+</div>
+
+
+<div
+id="taskList"
+>
+
+<div class="empty">
+No active tasks
+</div>
+
+</div>
+
+</div>
+
+
+<div class="right-bottom">
+
+<button
+class="new-session"
+id="newSession"
+>
+＋ New session
+</button>
+
+</div>
+
+</aside>
+
+
+</div>
+
+</div>
+
+
+<script src="/app.js"></script>
+
+</body>
+
+</html>

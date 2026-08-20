@@ -1,0 +1,50 @@
+[
+  {
+    "id":"build",
+    "name":"Build",
+    "description":"Build and verify applications",
+    "icon":"⌘"
+  },
+  {
+    "id":"frontend",
+    "name":"Frontend",
+    "description":"HTML, CSS, JavaScript and modern UI",
+    "icon":"◇"
+  },
+  {
+    "id":"backend",
+    "name":"Backend",
+    "description":"APIs, servers and backend services",
+    "icon":"◆"
+  },
+  {
+    "id":"database",
+    "name":"Database",
+    "description":"Database schemas, queries and data",
+    "icon":"▣"
+  },
+  {
+    "id":"debugging",
+    "name":"Debugging",
+    "description":"Find and diagnose project errors",
+    "icon":"⚙"
+  },
+  {
+    "id":"git",
+    "name":"Git",
+    "description":"Git, branches, commits and repositories",
+    "icon":"⑂"
+  },
+  {
+    "id":"testing",
+    "name":"Testing",
+    "description":"Tests, validation and quality checks",
+    "icon":"✓"
+  },
+  {
+    "id":"deploy",
+    "name":"Deploy",
+    "description":"Build and deployment workflows",
+    "icon":"↑"
+  }
+]

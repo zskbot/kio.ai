@@ -1,0 +1,40 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# API keys / credentials
+*.key
+*.pem
+*.secret
+secrets/
+credentials/
+tokens/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local runtime
+*.log
+*.pid
+
+# Temporary / backup files
+*.tmp
+*.bak
+*.broken
+server.py.before-clean

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "github",
+    "name": "GitHub",
+    "category": "Developer",
+    "description": "Repository, issues and pull request integration.",
+    "env": "GITHUB_TOKEN"
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "category": "Deployment",
+    "description": "Deployment and project integration.",
+    "env": "VERCEL_TOKEN"
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "category": "AI",
+    "description": "OpenAI API integration for KIO agents.",
+    "env": "OPENAI_API_KEY"
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "category": "AI",
+    "description": "Anthropic API integration.",
+    "env": "ANTHROPIC_API_KEY"
+  },
+  {
+    "id": "google-ai",
+    "name": "Google AI",
+    "category": "AI",
+    "description": "Google AI API integration.",
+    "env": "GOOGLE_AI_API_KEY"
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "category": "Local AI",
+    "description": "Run local AI models through the Ollama API.",
+    "env": ""
+  }
+]

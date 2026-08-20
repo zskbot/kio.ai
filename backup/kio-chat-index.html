@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <title>KIO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="brand">
+    <div class="brand-mark">K</div>
+    <span>KIO</span>
+  </div>
+
+  <button class="new-chat" id="newChat">
+    ＋ New session
+  </button>
+
+  <div class="side-title">WORKSPACE</div>
+
+  <button class="side-item active">
+    <span>⌁</span> Chat
+  </button>
+
+  <button class="side-item">
+    <span>⌘</span> Projects
+  </button>
+
+  <button class="side-item">
+    <span>▣</span> Tasks
+  </button>
+
+  <button class="side-item">
+    <span>◌</span> Activity
+  </button>
+
+  <div class="side-title">RECENT</div>
+
+  <div class="recent">
+    <button>Build my application</button>
+    <button>Fix project errors</button>
+    <button>Analyze repository</button>
+  </div>
+
+  <div class="sidebar-bottom">
+    <button class="side-item">
+      <span>⚙</span> Settings
+    </button>
+
+    <div class="user">
+      <div class="user-avatar">T</div>
+      <div>
+        <strong>Thuong</strong>
+        <small>Personal workspace</small>
+      </div>
+    </div>
+  </div>
+
+</aside>
+
+<div class="overlay" id="overlay"></div>
+
+<main class="main">
+
+  <header class="topbar">
+
+    <button class="mobile-menu" id="mobileMenu">☰</button>
+
+    <div class="brand-title">
+      KIO
+    </div>
+
+    <div class="breadcrumb">
+      New session
+    </div>
+
+    <button class="top-action">•••</button>
+
+  </header>
+
+  <section class="chat">
+
+    <!-- INITIAL STATE -->
+
+    <div class="start-screen" id="startScreen">
+
+      <div class="start-title">
+        What are you building?
+      </div>
+
+      <form class="large-composer" id="largeComposer">
+
+        <textarea
+          id="largePrompt"
+          rows="1"
+          placeholder="Ask Kio to build something..."
+        ></textarea>
+
+        <div class="large-composer-bottom">
+
+          <div class="large-tools">
+            <button type="button">＋</button>
+            <button type="button">Tools</button>
+            <button type="button">Project</button>
+          </div>
+
+          <button class="large-send" type="submit">
+            ↑
+          </button>
+
+        </div>
+
+      </form>
+
+      <div class="suggestions">
+
+        <button data-prompt="Build a modern web application">
+          <strong>Build an application</strong>
+          <span>Start a new project</span>
+        </button>
+
+        <button data-prompt="Analyze my project and find problems">
+          <strong>Analyze project</strong>
+          <span>Understand files and issues</span>
+        </button>
+
+        <button data-prompt="Find and fix errors in my project">
+          <strong>Fix my project</strong>
+          <span>Find and fix errors</span>
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- CHAT STATE -->
+
+    <div class="chat-session" id="chatSession">
+
+      <div class="messages" id="messages"></div>
+
+      <div class="composer-wrap">
+
+        <form class="composer" id="composer">
+
+          <textarea
+            id="prompt"
+            rows="1"
+            placeholder="Ask Kio..."
+          ></textarea>
+
+          <div class="composer-bottom">
+
+            <div class="tools">
+              <button type="button">＋</button>
+              <button type="button">Tools</button>
+              <button type="button">Project</button>
+            </div>
+
+            <button class="send" type="submit">
+              ↑
+            </button>
+
+          </div>
+
+        </form>
+
+        <div class="composer-note">
+          Kio can make mistakes. Review important changes.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+
+</body>
+</html>

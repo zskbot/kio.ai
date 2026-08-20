@@ -1,0 +1,58 @@
+[
+  {
+    "id":"openai",
+    "name":"OpenAI",
+    "category":"AI",
+    "description":"AI models and developer APIs",
+    "status":"DISCONNECTED"
+  },
+  {
+    "id":"anthropic",
+    "name":"Claude",
+    "category":"AI",
+    "description":"Claude AI and developer tools",
+    "status":"DISCONNECTED"
+  },
+  {
+    "id":"google-ai",
+    "name":"Gemini",
+    "category":"AI",
+    "description":"Google AI models and services",
+    "status":"DISCONNECTED"
+  },
+  {
+    "id":"github",
+    "name":"GitHub",
+    "category":"Developer",
+    "description":"Repositories, issues and pull requests",
+    "status":"DISCONNECTED"
+  },
+  {
+    "id":"vercel",
+    "name":"Vercel",
+    "category":"Developer",
+    "description":"Deploy and host web applications",
+    "status":"DISCONNECTED"
+  },
+  {
+    "id":"supabase",
+    "name":"Supabase",
+    "category":"Developer",
+    "description":"Database, authentication and backend",
+    "status":"DISCONNECTED"
+  },
+  {
+    "id":"figma",
+    "name":"Figma",
+    "category":"Design",
+    "description":"Design files and interface workflows",
+    "status":"DISCONNECTED"
+  },
+  {
+    "id":"canva",
+    "name":"Canva",
+    "category":"Design",
+    "description":"Design and visual content workflows",
+    "status":"DISCONNECTED"
+  }
+]
