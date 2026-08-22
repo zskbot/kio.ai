@@ -54,9 +54,54 @@ K
 <div
 id="pageTitle"
 class="session-title"
+style="display:none"
 >
 New session
 </div>
+
+<nav class="topbar-nav">
+
+<button
+class="nav-item topbar-nav-item active"
+data-page="dashboard"
+>
+<span class="nav-icon">▣</span>
+<span class="nav-label">Dashboard</span>
+</button>
+
+<button
+class="nav-item topbar-nav-item"
+data-page="chat"
+>
+<span class="nav-icon">⌁</span>
+<span class="nav-label">Chat</span>
+</button>
+
+<button
+class="nav-item topbar-nav-item"
+data-page="skills"
+>
+<span class="nav-icon">◇</span>
+<span class="nav-label">Skills</span>
+</button>
+
+<button
+class="nav-item topbar-nav-item"
+data-page="tools"
+>
+<span class="nav-icon">⌘</span>
+<span class="nav-label">Tools</span>
+</button>
+
+<button
+class="nav-item topbar-nav-item"
+data-page="plugins"
+>
+<span class="nav-icon">◆</span>
+<span class="nav-label">Plugins</span>
+</button>
+
+</nav>
 
 
 <div class="top-actions">
@@ -170,6 +215,143 @@ class="console"
 <!-- CENTER -->
 
 <main class="workspace">
+
+
+<!-- DASHBOARD -->
+
+<section
+id="dashboardPage"
+class="management-page"
+>
+
+<div class="management-header">
+
+<div>
+
+<h2>
+Dashboard
+</h2>
+
+<p>
+Overview of your KIO AI workspace.
+</p>
+
+</div>
+
+</div>
+
+<div class="dash-stats">
+
+<div class="dash-stat">
+
+<div class="dash-stat-icon">
+◇
+</div>
+
+<div class="dash-stat-value" id="statSkills">
+0
+</div>
+
+<div class="dash-stat-label">
+Skills
+</div>
+
+</div>
+
+<div class="dash-stat">
+
+<div class="dash-stat-icon">
+⌘
+</div>
+
+<div class="dash-stat-value" id="statTools">
+0
+</div>
+
+<div class="dash-stat-label">
+Tools
+</div>
+
+</div>
+
+<div class="dash-stat">
+
+<div class="dash-stat-icon">
+◆
+</div>
+
+<div class="dash-stat-value" id="statPlugins">
+0
+</div>
+
+<div class="dash-stat-label">
+Plugins
+</div>
+
+</div>
+
+<div class="dash-stat">
+
+<div class="dash-stat-icon">
+⌁
+</div>
+
+<div class="dash-stat-value" id="statTasks">
+0
+</div>
+
+<div class="dash-stat-label">
+Tasks
+</div>
+
+</div>
+
+</div>
+
+<div class="dash-section">
+
+<h3>
+Recent Activity
+</h3>
+
+<div id="dashActivity" class="dash-activity">
+
+<div class="empty">
+No recent activity
+</div>
+
+</div>
+
+</div>
+
+<div class="dash-section">
+
+<h3>
+Quick Actions
+</h3>
+
+<div class="dash-actions">
+
+<button class="dash-action" data-task="Build a modern web application">
+<span>▶</span>
+Build an application
+</button>
+
+<button class="dash-action" data-task="Analyze my project and find problems">
+<span>◇</span>
+Analyze project
+</button>
+
+<button class="dash-action" data-task="Find and fix errors in my project">
+<span>⚙</span>
+Fix errors
+</button>
+
+</div>
+
+</div>
+
+</section>
 
 
 <!-- START -->
@@ -478,45 +660,6 @@ Workspace
 </strong>
 
 </div>
-
-
-<nav class="nav">
-
-<button
-class="nav-item active"
-data-page="chat"
->
-<span>⌁</span>
-Chat
-</button>
-
-
-<button
-class="nav-item"
-data-page="skills"
->
-<span>◇</span>
-Skills
-</button>
-
-
-<button
-class="nav-item"
-data-page="tools"
->
-<span>⌘</span>
-Tools
-</button>
-
-<button
-class="nav-item"
-data-page="plugins"
->
-<span>◆</span>
-Plugins
-</button>
-
-</nav>
 
 
 <div class="project-block">
