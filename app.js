@@ -275,12 +275,12 @@ pageTitle.textContent =
 "Active session";
 
 document
-.querySelectorAll(".nav-item")
+.querySelectorAll("[data-page]")
 .forEach(x => x.classList.remove("active"));
 
 document
-.querySelector('[data-page="chat"]')
-.classList.add("active");
+.querySelectorAll('[data-page="chat"]')
+.forEach(x => x.classList.add("active"));
 
 }
 
@@ -412,64 +412,37 @@ toolsPage.classList.remove("active");
 }
 
 document
-.querySelectorAll(".nav-item")
+.querySelectorAll("[data-page]")
 .forEach(x =>
 x.classList.remove("active")
 );
 
-if(page === "chat") {
+const pages = {
+chat: chatScreen,
+skills: skillsPage,
+tools: toolsPage,
+plugins: pluginsPage
+};
 
-chatScreen.classList.add("active");
+const titles = {
+chat: "Chat",
+skills: "Skills",
+tools: "Tools",
+plugins: "Plugins"
+};
 
-pageTitle.textContent =
-"Chat";
-
-document
-.querySelector('[data-page="chat"]')
-.classList.add("active");
-
-}
-
-if(page === "skills") {
-
-skillsPage.classList.add("active");
-
-pageTitle.textContent =
-"Skills";
-
-document
-.querySelector('[data-page="skills"]')
-.classList.add("active");
-
-}
-
-if(page === "tools") {
-
-if (toolsPage) {
-toolsPage.classList.add("active");
+if (pages[page]) {
+pages[page].classList.add("active");
 }
 
 pageTitle.textContent =
-"Tools";
+titles[page] || "New session";
 
 document
-.querySelector('[data-page="tools"]')
-.classList.add("active");
-
-}
-
-if(page === "plugins") {
-
-pluginsPage.classList.add("active");
-
-pageTitle.textContent =
-"Plugins";
-
-document
-.querySelector('[data-page="plugins"]')
-.classList.add("active");
-
-}
+.querySelectorAll(`[data-page="${page}"]`)
+.forEach(x =>
+x.classList.add("active")
+);
 
 closeMobileMenu();
 
@@ -608,60 +581,6 @@ addAgentMessage(
 
 }
 
-function renderPlugins(plugins) {
-
-const grid =
-document.getElementById("pluginsGrid");
-
-grid.innerHTML = "";
-
-plugins.forEach(plugin => {
-
-const card =
-document.createElement("div");
-
-card.className =
-"card";
-
-card.innerHTML = `
-<div class="card-icon">
-◆
-</div>
-
-<h3>
-${escapeHtml(plugin.name)}
-</h3>
-
-<p>
-${escapeHtml(plugin.description)}
-</p>
-
-<div class="card-meta">
-
-<span
-class="status"
-data-plugin-status="${escapeHtml(plugin.id)}"
->
-${escapeHtml(plugin.status)}
-</span>
-
-<button
-class="card-btn plugin-btn"
-data-plugin="${escapeHtml(plugin.id)}"
->
-Connect
-</button>
-
-</div>
-`;
-
-grid.appendChild(card);
-
-});
-
-}
-
-
 async function loadManagementData() {
 
 try {
@@ -671,6 +590,16 @@ await fetch("/api/skills")
 .then(r => r.json());
 
 renderSkills(skills);
+
+} catch {}
+
+try {
+
+const tools =
+await fetch("/api/tools")
+.then(r => r.json());
+
+renderTools(tools);
 
 } catch {}
 
