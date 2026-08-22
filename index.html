@@ -172,6 +172,143 @@ class="console"
 <main class="workspace">
 
 
+<!-- DASHBOARD -->
+
+<section
+id="dashboardPage"
+class="management-page"
+>
+
+<div class="management-header">
+
+<div>
+
+<h2>
+Dashboard
+</h2>
+
+<p>
+Overview of your KIO AI workspace.
+</p>
+
+</div>
+
+</div>
+
+<div class="dash-stats">
+
+<div class="dash-stat">
+
+<div class="dash-stat-icon">
+◇
+</div>
+
+<div class="dash-stat-value" id="statSkills">
+0
+</div>
+
+<div class="dash-stat-label">
+Skills
+</div>
+
+</div>
+
+<div class="dash-stat">
+
+<div class="dash-stat-icon">
+⌘
+</div>
+
+<div class="dash-stat-value" id="statTools">
+0
+</div>
+
+<div class="dash-stat-label">
+Tools
+</div>
+
+</div>
+
+<div class="dash-stat">
+
+<div class="dash-stat-icon">
+◆
+</div>
+
+<div class="dash-stat-value" id="statPlugins">
+0
+</div>
+
+<div class="dash-stat-label">
+Plugins
+</div>
+
+</div>
+
+<div class="dash-stat">
+
+<div class="dash-stat-icon">
+⌁
+</div>
+
+<div class="dash-stat-value" id="statTasks">
+0
+</div>
+
+<div class="dash-stat-label">
+Tasks
+</div>
+
+</div>
+
+</div>
+
+<div class="dash-section">
+
+<h3>
+Recent Activity
+</h3>
+
+<div id="dashActivity" class="dash-activity">
+
+<div class="empty">
+No recent activity
+</div>
+
+</div>
+
+</div>
+
+<div class="dash-section">
+
+<h3>
+Quick Actions
+</h3>
+
+<div class="dash-actions">
+
+<button class="dash-action" data-task="Build a modern web application">
+<span>▶</span>
+Build an application
+</button>
+
+<button class="dash-action" data-task="Analyze my project and find problems">
+<span>◇</span>
+Analyze project
+</button>
+
+<button class="dash-action" data-task="Find and fix errors in my project">
+<span>⚙</span>
+Fix errors
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
 <!-- START -->
 
 <section
@@ -611,6 +748,14 @@ id="newSession"
 
 <button
 class="nav-item mobile-nav-item active"
+data-page="dashboard"
+>
+<span>▣</span>
+Dashboard
+</button>
+
+<button
+class="nav-item mobile-nav-item"
 data-page="chat"
 >
 <span>⌁</span>

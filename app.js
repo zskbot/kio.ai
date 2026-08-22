@@ -13,6 +13,9 @@ document.getElementById("pluginsPage");
 const toolsPage =
 document.getElementById("toolsPage");
 
+const dashboardPage =
+document.getElementById("dashboardPage");
+
 const startForm =
 document.getElementById("startForm");
 
@@ -366,6 +369,10 @@ skillsPage.classList.remove("active");
 
 pluginsPage.classList.remove("active");
 
+if (dashboardPage) {
+dashboardPage.classList.remove("active");
+}
+
 startScreen.style.display = "";
 
 messages.innerHTML = "";
@@ -418,6 +425,7 @@ x.classList.remove("active")
 );
 
 const pages = {
+dashboard: dashboardPage,
 chat: chatScreen,
 skills: skillsPage,
 tools: toolsPage,
@@ -425,6 +433,7 @@ plugins: pluginsPage
 };
 
 const titles = {
+dashboard: "Dashboard",
 chat: "Chat",
 skills: "Skills",
 tools: "Tools",
@@ -610,6 +619,59 @@ await fetch("/api/plugins")
 .then(r => r.json());
 
 renderPlugins(plugins);
+
+} catch {}
+
+}
+
+
+async function loadDashboard() {
+
+try {
+
+const [
+skills,
+tools,
+plugins,
+events
+] = await Promise.all([
+fetch("/api/skills").then(r => r.json()),
+fetch("/api/tools").then(r => r.json()),
+fetch("/api/plugins").then(r => r.json()),
+fetch("/api/events").then(r => r.json())
+]);
+
+document.getElementById("statSkills").textContent =
+skills.length;
+
+document.getElementById("statTools").textContent =
+tools.length;
+
+document.getElementById("statPlugins").textContent =
+plugins.length;
+
+document.getElementById("statTasks").textContent =
+events.length;
+
+const activityBox =
+document.getElementById("dashActivity");
+
+const logs = events
+.filter(e => e.type === "log")
+.slice(-8)
+.reverse();
+
+if (logs.length) {
+
+activityBox.innerHTML =
+logs.map(e =>
+`<div class="dash-log ${e.level === "error" ? "error" : ""}">
+<span class="dash-log-time">${e.time}</span>
+${escapeHtml(e.message)}
+</div>`
+).join("");
+
+}
 
 } catch {}
 
@@ -940,7 +1002,11 @@ closeMobileMenu();
 
 loadManagementData();
 
+loadDashboard();
+
 connectSocket();
+
+showPage("dashboard");
 
 /* ==========================================
    KIO PLUGIN MANAGER
