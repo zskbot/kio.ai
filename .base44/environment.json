@@ -1,0 +1,12 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {"name": "OPENAI_API_KEY", "description": "Optional. OpenAI API key for the OpenAI plugin integration. Get it from https://platform.openai.com/api-keys", "requiredAtBoot": false},
+    {"name": "ANTHROPIC_API_KEY", "description": "Optional. Anthropic API key for the Anthropic plugin integration. Get it from https://console.anthropic.com/settings/keys", "requiredAtBoot": false},
+    {"name": "GOOGLE_AI_API_KEY", "description": "Optional. Google AI (Gemini) API key for the Google AI plugin. Get it from https://aistudio.google.com/apikey", "requiredAtBoot": false},
+    {"name": "GITHUB_TOKEN", "description": "Optional. GitHub personal access token for the GitHub plugin (repos/issues/PRs). Get it from https://github.com/settings/tokens", "requiredAtBoot": false},
+    {"name": "VERCEL_TOKEN", "description": "Optional. Vercel access token for the Vercel deployment plugin. Get it from https://vercel.com/account/tokens", "requiredAtBoot": false}
+  ]
+}
