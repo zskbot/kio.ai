@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Huỳnh Thương · KIO.ai — AI Coding Agent Builder</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: "#0a0e14",
+        panel: "#11161f",
+        line: "#1e2633",
+        sky: "#7dd3fc",
+        violet: "#a78bfa",
+        mint: "#4ade80",
+        pink: "#ff69b4",
+      },
+      fontFamily: {
+        mono: ["'JetBrains Mono'", "'Fira Code'", "ui-monospace", "monospace"],
+      },
+    },
+  },
+};
+</script>
+<style>
+  body { background: #0a0e14; }
+  .glow-sky { box-shadow: 0 0 40px -8px rgba(125,211,252,.5); }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(125,211,252,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(125,211,252,.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .card { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  .card:hover { transform: translateY(-4px); border-color: rgba(125,211,252,.4); box-shadow: 0 12px 40px -12px rgba(125,211,252,.25); }
+  .tag { transition: all .2s ease; }
+  .tag:hover { transform: translateY(-2px); }
+  ::selection { background: rgba(125,211,252,.3); }
+  .tab-btn.active { background: rgba(125,211,252,.15); border-color: rgba(125,211,252,.5); color: #7dd3fc; }
+  .nav-link.active { color: #7dd3fc; }
+  .nav-link.active::after { opacity: 1; }
+  .nav-link::after {
+    content:""; display:block; height:2px; margin-top:4px;
+    background:#7dd3fc; border-radius:2px; opacity:0; transition:opacity .2s;
+  }
+  .cursor-blink { animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .bar { transition: width 1.2s cubic-bezier(.22,1,.36,1); }
+  .reveal { opacity:0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity:1; transform:none; }
+</style>
+</head>
+<body class="bg-ink text-slate-300 font-mono antialiased">
+
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-50 border-b border-line/60 bg-ink/85 backdrop-blur-md">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 text-slate-100 font-bold tracking-tight">
+      <span class="w-2.5 h-2.5 rounded-full bg-sky glow-sky"></span>
+      <span>zskbot<span class="text-sky">.dev</span></span>
+    </a>
+    <div id="navlinks" class="hidden md:flex items-center gap-7 text-sm text-slate-400">
+      <a href="#about" class="nav-link hover:text-sky transition">about</a>
+      <a href="#skills" class="nav-link hover:text-sky transition">skills</a>
+      <a href="#experience" class="nav-link hover:text-sky transition">journey</a>
+      <a href="#project" class="nav-link hover:text-sky transition">kio.ai</a>
+      <a href="#blog" class="nav-link hover:text-sky transition">blog</a>
+      <a href="#contact" class="nav-link hover:text-sky transition">contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="#project" class="hidden sm:inline text-sm px-4 py-2 rounded-lg border border-line bg-panel hover:border-sky/50 hover:text-sky transition">Try KIO.ai</a>
+      <button id="menuBtn" class="md:hidden text-slate-300 text-xl" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+  <!-- mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden border-t border-line/60 bg-ink/95 px-6 py-4 space-y-3 text-sm">
+    <a href="#about" class="block hover:text-sky">about</a>
+    <a href="#skills" class="block hover:text-sky">skills</a>
+    <a href="#experience" class="block hover:text-sky">journey</a>
+    <a href="#project" class="block hover:text-sky">kio.ai</a>
+    <a href="#blog" class="block hover:text-sky">blog</a>
+    <a href="#contact" class="block hover:text-sky">contact</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="relative min-h-screen grid-bg flex items-center pt-16">
+  <div class="max-w-6xl mx-auto px-6 py-24 w-full">
+    <p class="text-sky text-sm mb-4 tracking-widest uppercase">// hello, world</p>
+    <h1 class="text-4xl md:text-6xl font-bold text-slate-50 leading-tight">Huỳnh Thương</h1>
+    <p class="mt-3 text-lg md:text-2xl text-slate-300">
+      Building <span class="text-violet font-semibold">AI coding agents</span> that
+      <span class="text-mint">plan</span>, <span class="text-sky">execute</span> &amp;
+      <span class="text-pink">report</span>.
+    </p>
+    <p class="mt-3 text-slate-400 text-sm md:text-base">
+      <span id="typeLine"></span><span class="cursor-blink text-sky">▍</span>
+    </p>
+    <p class="mt-6 max-w-2xl text-slate-400 leading-relaxed">
+      Tôi thiết kế và phát triển các tác nhân lập trình thông minh — tự chọn skill &amp; tool,
+      quét workspace, lập kế hoạch thực thi và báo cáo kết quả. Hiện tập trung vào
+      <span class="text-sky">KIO.ai</span>, một AI coding agent mã nguồn mở.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#project" class="px-5 py-3 rounded-lg bg-sky text-ink font-semibold hover:bg-sky/80 transition">Xem KIO.ai →</a>
+      <a href="https://github.com/zskbot" target="_blank" rel="noopener" class="px-5 py-3 rounded-lg border border-line bg-panel hover:border-sky/50 hover:text-sky transition">GitHub</a>
+      <a href="https://kio.ai" target="_blank" rel="noopener" class="px-5 py-3 rounded-lg border border-line bg-panel hover:border-violet/50 hover:text-violet transition">kio.ai</a>
+      <a href="#contact" class="px-5 py-3 rounded-lg border border-line bg-panel hover:border-mint/50 hover:text-mint transition">Liên hệ</a>
+    </div>
+
+    <div class="mt-12 flex flex-wrap gap-2 text-xs">
+      <span class="tag px-3 py-1.5 rounded-md bg-panel border border-line text-sky">Python</span>
+      <span class="tag px-3 py-1.5 rounded-md bg-panel border border-line text-violet">Agent Router</span>
+      <span class="tag px-3 py-1.5 rounded-md bg-panel border border-line text-mint">Git / GitHub</span>
+      <span class="tag px-3 py-1.5 rounded-md bg-panel border border-line text-pink">Web · HTML/CSS/JS</span>
+      <span class="tag px-3 py-1.5 rounded-md bg-panel border border-line text-slate-300">Deploy</span>
+    </div>
+    <div class="mt-6 text-slate-600 text-xs">scroll <span class="animate-bounce inline-block">↓</span></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="py-16 border-t border-line/60">
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-5 text-center">
+    <div class="card p-6 rounded-xl bg-panel border border-line"><p class="text-3xl font-bold text-sky">192+</p><p class="text-sm text-slate-400 mt-1">Public repos</p></div>
+    <div class="card p-6 rounded-xl bg-panel border border-line"><p class="text-3xl font-bold text-violet">57</p><p class="text-sm text-slate-400 mt-1">Contributions · KIO.ai</p></div>
+    <div class="card p-6 rounded-xl bg-panel border border-line"><p class="text-3xl font-bold text-mint">10</p><p class="text-sm text-slate-400 mt-1">Agent tools</p></div>
+    <div class="card p-6 rounded-xl bg-panel border border-line"><p class="text-3xl font-bold text-pink">7</p><p class="text-sm text-slate-400 mt-1">Agent skills</p></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 border-t border-line/60 reveal">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-sky text-sm mb-2 tracking-widest uppercase">// about <span class="text-slate-600">• 01</span></p>
+    <h2 class="text-3xl font-bold text-slate-50 mb-8">Về tôi</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-6 rounded-xl bg-panel border border-line"><div class="text-2xl mb-3">🧠</div><h3 class="text-slate-100 font-semibold mb-2">AI Agent Builder</h3><p class="text-sm text-slate-400 leading-relaxed">Xây dựng tác nhân lập trình tự thích ứng — chấm điểm từ khoá để chọn skill/tool phù hợp cho từng tác vụ.</p></div>
+      <div class="card p-6 rounded-xl bg-panel border border-line"><div class="text-2xl mb-3">⚙️</div><h3 class="text-slate-100 font-semibold mb-2">Full-stack</h3><p class="text-sm text-slate-400 leading-relaxed">Từ backend Python (server, router) tới giao diện web nhẹ không phụ thuộc framework nặng.</p></div>
+      <div class="card p-6 rounded-xl bg-panel border border-line"><div class="text-2xl mb-3">🚀</div><h3 class="text-slate-100 font-semibold mb-2">Open Source</h3><p class="text-sm text-slate-400 leading-relaxed">192+ public repos trên GitHub, chia sẻ công cụ, skills và workflow cho cộng đồng.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="py-24 border-t border-line/60 reveal">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-sky text-sm mb-2 tracking-widest uppercase">// skills <span class="text-slate-600">• 02</span></p>
+    <h2 class="text-3xl font-bold text-slate-50 mb-8">Kỹ năng</h2>
+    <div class="grid md:grid-cols-2 gap-x-12 gap-y-6">
+      <div><div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Python / Backend</span><span class="text-sky">90%</span></div><div class="h-2 rounded-full bg-line"><div class="bar h-2 rounded-full bg-sky" data-w="90%" style="width:0%"></div></div></div>
+      <div><div class="flex justify-between text-sm mb-2"><span class="text-slate-300">AI Agent / Router</span><span class="text-violet">85%</span></div><div class="h-2 rounded-full bg-line"><div class="bar h-2 rounded-full bg-violet" data-w="85%" style="width:0%"></div></div></div>
+      <div><div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Frontend (HTML/CSS/JS)</span><span class="text-mint">80%</span></div><div class="h-2 rounded-full bg-line"><div class="bar h-2 rounded-full bg-mint" data-w="80%" style="width:0%"></div></div></div>
+      <div><div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Git / GitHub</span><span class="text-pink">85%</span></div><div class="h-2 rounded-full bg-line"><div class="bar h-2 rounded-full bg-pink" data-w="85%" style="width:0%"></div></div></div>
+      <div><div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Testing / Debugging</span><span class="text-sky">75%</span></div><div class="h-2 rounded-full bg-line"><div class="bar h-2 rounded-full bg-sky" data-w="75%" style="width:0%"></div></div></div>
+      <div><div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Deploy / CI-CD</span><span class="text-violet">70%</span></div><div class="h-2 rounded-full bg-line"><div class="bar h-2 rounded-full bg-violet" data-w="70%" style="width:0%"></div></div></div>
+    </div>
+    <div class="mt-8 grid md:grid-cols-4 gap-5">
+      <div class="card p-5 rounded-xl bg-panel border border-line"><h4 class="text-sky font-semibold mb-2">Backend</h4><p class="text-sm text-slate-400">Python · server.py · agent_router.py · JSON APIs</p></div>
+      <div class="card p-5 rounded-xl bg-panel border border-line"><h4 class="text-violet font-semibold mb-2">Frontend</h4><p class="text-sm text-slate-400">HTML · CSS · JavaScript · giao diện nhẹ</p></div>
+      <div class="card p-5 rounded-xl bg-panel border border-line"><h4 class="text-mint font-semibold mb-2">DevOps</h4><p class="text-sm text-slate-400">Git · GitHub Actions · Deploy · CI/CD</p></div>
+      <div class="card p-5 rounded-xl bg-panel border border-line"><h4 class="text-pink font-semibold mb-2">AI / Agent</h4><p class="text-sm text-slate-400">Skill routing · Tool selection · Planning · Claude Skills</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="py-24 border-t border-line/60 reveal">
+  <div class="max-w-4xl mx-auto px-6">
+    <p class="text-sky text-sm mb-2 tracking-widest uppercase">// journey <span class="text-slate-600">• 03</span></p>
+    <h2 class="text-3xl font-bold text-slate-50 mb-10">Hành trình</h2>
+    <div class="relative border-l border-line pl-8 space-y-10">
+      <div class="relative"><span class="absolute -left-[37px] top-1 w-3 h-3 rounded-full bg-sky glow-sky"></span><p class="text-xs text-sky mb-1">2026 · hiện tại</p><h3 class="text-slate-100 font-semibold">KIO.ai — AI Coding Agent</h3><p class="text-sm text-slate-400 mt-1">Thiết kế router thông minh chọn skill/tool, quét workspace, lập kế hoạch thực thi và báo cáo kết quả.</p></div>
+      <div class="relative"><span class="absolute -left-[37px] top-1 w-3 h-3 rounded-full bg-violet"></span><p class="text-xs text-violet mb-1">2025 · @Clrkis</p><h3 class="text-slate-100 font-semibold">Auren OS &amp; Agent tooling</h3><p class="text-sm text-slate-400 mt-1">Xây dựng hệ điều hành tác nhân và bộ công cụ lập trình AI cho doanh nghiệp.</p></div>
+      <div class="relative"><span class="absolute -left-[37px] top-1 w-3 h-3 rounded-full bg-mint"></span><p class="text-xs text-mint mb-1">2025 · khởi đầu</p><h3 class="text-slate-100 font-semibold">Open Source &amp; Claude Skills</h3><p class="text-sm text-slate-400 mt-1">Chia sẻ skills, tools và workflow cho cộng đồng Claude Code; xây dựng bộ sưu tập awesome-claude-skills.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="py-24 border-t border-line/60 reveal">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-sky text-sm mb-2 tracking-widest uppercase">// process <span class="text-slate-600">• 04</span></p>
+    <h2 class="text-3xl font-bold text-slate-50 mb-8">Cách tôi làm việc</h2>
+    <div class="grid md:grid-cols-5 gap-4">
+      <div class="card p-5 rounded-xl bg-panel border border-line text-center"><p class="text-2xl text-sky mb-2">01</p><h4 class="text-slate-100 font-semibold text-sm mb-1">Phân tích</h4><p class="text-xs text-slate-400">Hiểu yêu cầu &amp; mục tiêu</p></div>
+      <div class="card p-5 rounded-xl bg-panel border border-line text-center"><p class="text-2xl text-violet mb-2">02</p><h4 class="text-slate-100 font-semibold text-sm mb-1">Chọn skill/tool</h4><p class="text-xs text-slate-400">Router chấm điểm phù hợp</p></div>
+      <div class="card p-5 rounded-xl bg-panel border border-line text-center"><p class="text-2xl text-mint mb-2">03</p><h4 class="text-slate-100 font-semibold text-sm mb-1">Quét workspace</h4><p class="text-xs text-slate-400">Nắm cấu trúc &amp; file lõi</p></div>
+      <div class="card p-5 rounded-xl bg-panel border border-line text-center"><p class="text-2xl text-pink mb-2">04</p><h4 class="text-slate-100 font-semibold text-sm mb-1">Build &amp; validate</h4><p class="text-xs text-slate-400">Thực thi &amp; kiểm chứng</p></div>
+      <div class="card p-5 rounded-xl bg-panel border border-line text-center"><p class="text-2xl text-sky mb-2">05</p><h4 class="text-slate-100 font-semibold text-sm mb-1">Báo cáo</h4><p class="text-xs text-slate-400">Trả kết quả JSON rõ ràng</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project" class="py-24 border-t border-line/60 reveal">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-sky text-sm mb-2 tracking-widest uppercase">// flagship <span class="text-slate-600">• 05</span></p>
+    <h2 class="text-3xl font-bold text-slate-50 mb-2">KIO.ai</h2>
+    <p class="text-slate-400 mb-8 max-w-2xl">Trợ lý lập trình dạng <em>Agent</em> tự chọn skill &amp; tool, quét workspace, lên kế hoạch thực thi và báo cáo kết quả.</p>
+
+    <!-- sub-tabs -->
+    <div class="flex flex-wrap gap-2 mb-8">
+      <button class="tab-btn px-4 py-2 rounded-lg border border-line bg-panel text-slate-300 text-sm" data-tab="overview">Tổng quan</button>
+      <button class="tab-btn px-4 py-2 rounded-lg border border-line bg-panel text-slate-300 text-sm" data-tab="tools">Tools</button>
+      <button class="tab-btn px-4 py-2 rounded-lg border border-line bg-panel text-slate-300 text-sm" data-tab="skills">Skills</button>
+      <button class="tab-btn px-4 py-2 rounded-lg border border-line bg-panel text-slate-300 text-sm" data-tab="structure">Structure</button>
+      <button class="tab-btn px-4 py-2 rounded-lg border border-line bg-panel text-slate-300 text-sm" data-tab="quickstart">Quickstart</button>
+    </div>
+
+    <!-- TAB: overview -->
+    <div id="tab-overview" class="tab-panel">
+      <div class="p-6 rounded-xl bg-panel border border-line mb-8">
+        <p class="text-xs text-slate-500 mb-4 tracking-widest uppercase">// architecture</p>
+        <div class="flex flex-wrap items-center gap-2 text-xs md:text-sm">
+          <span class="px-3 py-2 rounded-lg bg-ink border border-sky/40 text-sky">Task</span><span class="text-slate-600">→</span>
+          <span class="px-3 py-2 rounded-lg bg-ink border border-violet/40 text-violet">Router · score</span><span class="text-slate-600">→</span>
+          <span class="px-3 py-2 rounded-lg bg-ink border border-mint/40 text-mint">Scan workspace</span><span class="text-slate-600">→</span>
+          <span class="px-3 py-2 rounded-lg bg-ink border border-pink/40 text-pink">Plan</span><span class="text-slate-600">→</span>
+          <span class="px-3 py-2 rounded-lg bg-ink border border-sky/40 text-sky">Report</span>
+        </div>
+      </div>
+      <h3 class="text-xl font-semibold text-slate-100 mb-5">Tính năng nổi bật</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="card p-5 rounded-xl bg-panel border border-line"><div class="text-xl mb-2">🧩</div><h4 class="text-slate-100 font-semibold mb-1">Router thông minh</h4><p class="text-sm text-slate-400">Chấm điểm từ khoá để tự chọn skill/tool phù hợp nhất với từng yêu cầu.</p></div>
+        <div class="card p-5 rounded-xl bg-panel border border-line"><div class="text-xl mb-2">📁</div><h4 class="text-slate-100 font-semibold mb-1">Quét workspace</h4><p class="text-sm text-slate-400">Tự động liệt kê file, bỏ qua <code class="text-sky">.git</code>, <code class="text-sky">node_modules</code>, <code class="text-sky">.venv</code>, <code class="text-sky">.env</code>.</p></div>
+        <div class="card p-5 rounded-xl bg-panel border border-line"><div class="text-xl mb-2">🎯</div><h4 class="text-slate-100 font-semibold mb-1">Chọn file ưu tiên</h4><p class="text-sm text-slate-400">Ưu tiên tệp lõi như <code class="text-sky">index.html</code>, <code class="text-sky">style.css</code>, <code class="text-sky">app.js</code>, <code class="text-sky">server.py</code>.</p></div>
+        <div class="card p-5 rounded-xl bg-panel border border-line"><div class="text-xl mb-2">🗺️</div><h4 class="text-slate-100 font-semibold mb-1">Lập kế hoạch từng bước</h4><p class="text-sm text-slate-400">Phân tích → chọn skill/tool → quét → build → validate → báo cáo.</p></div>
+        <div class="card p-5 rounded-xl bg-panel border border-line"><div class="text-xl mb-2">🔌</div><h4 class="text-slate-100 font-semibold mb-1">Kiến trúc plugin</h4><p class="text-sm text-slate-400">Mở rộng qua <code class="text-sky">plugins.json</code>, <code class="text-sky">plugins/</code>, <code class="text-sky">skills/</code>.</p></div>
+        <div class="card p-5 rounded-xl bg-panel border border-line"><div class="text-xl mb-2">🐙</div><h4 class="text-slate-100 font-semibold mb-1">Tích hợp Git/GitHub</h4><p class="text-sm text-slate-400">Thao tác repo, branch, pull request ngay trong agent.</p></div>
+      </div>
+    </div>
+
+    <!-- TAB: tools -->
+    <div id="tab-tools" class="tab-panel hidden">
+      <div class="p-6 rounded-xl bg-panel border border-line">
+        <h4 class="text-slate-100 font-semibold mb-4">🛠 Bộ công cụ (Tools)</h4>
+        <ul class="space-y-2 text-sm">
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">⌘ terminal</span><span class="text-sky">Core</span></li>
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">◇ file-manager</span><span class="text-sky">Core</span></li>
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">⌕ code-search</span><span class="text-sky">Core</span></li>
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">▶ build</span><span class="text-violet">Build</span></li>
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">✓ test</span><span class="text-violet">Build</span></li>
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">⑂ git</span><span class="text-mint">Developer</span></li>
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">◈ github</span><span class="text-mint">Developer</span></li>
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">↑ deploy</span><span class="text-mint">Developer</span></li>
+          <li class="flex justify-between border-b border-line/50 pb-2"><span class="text-slate-300">◎ browser</span><span class="text-pink">Web</span></li>
+          <li class="flex justify-between"><span class="text-slate-300">↗ http</span><span class="text-pink">Web</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB: skills -->
+    <div id="tab-skills" class="tab-panel hidden">
+      <div class="p-6 rounded-xl bg-panel border border-line">
+        <h4 class="text-slate-100 font-semibold mb-4">🧬 Bộ kỹ năng (Skills)</h4>
+        <p class="text-sm text-slate-400 mb-4">Router chấm điểm để chọn tối đa <span class="text-sky">4 skill</span> phù hợp mỗi tác vụ:</p>
+        <div class="flex flex-wrap gap-2">
+          <span class="tag px-3 py-1.5 rounded-md bg-ink border border-line text-sky">frontend</span>
+          <span class="tag px-3 py-1.5 rounded-md bg-ink border border-line text-violet">backend</span>
+          <span class="tag px-3 py-1.5 rounded-md bg-ink border border-line text-mint">debugging</span>
+          <span class="tag px-3 py-1.5 rounded-md bg-ink border border-line text-pink">testing</span>
+          <span class="tag px-3 py-1.5 rounded-md bg-ink border border-line text-sky">git-workflow</span>
+          <span class="tag px-3 py-1.5 rounded-md bg-ink border border-line text-violet">deployment</span>
+          <span class="tag px-3 py-1.5 rounded-md bg-ink border border-line text-mint">project-analysis</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-4">Mặc định: <code class="text-sky">project-analysis</code> (file-manager, code-search, build) để luôn có hướng xử lý an toàn.</p>
+      </div>
+    </div>
+
+    <!-- TAB: structure -->
+    <div id="tab-structure" class="tab-panel hidden">
+      <div class="rounded-xl bg-black/60 border border-line overflow-hidden">
+        <div class="px-4 py-2 border-b border-line text-xs text-slate-500">kio.ai/ — structure</div>
+        <pre class="p-5 text-sm text-slate-300 overflow-x-auto leading-relaxed">kio.ai/
+├── .github/            # Workflow / cấu hình GitHub
+├── assets/             # Ảnh, banner, tài nguyên tĩnh
+├── backup/             # Bản sao lưu
+├── plugins/            # Plugin mở rộng cho agent
+├── skills/             # Định nghĩa các skill
+├── agent_router.py     # Bộ định tuyến task → skill/tool → plan
+├── server.py           # Backend phục vụ agent &amp; giao diện
+├── index.html          # Giao diện web
+├── app.js              # Logic phía client
+├── style.css           # Giao diện style
+├── plugins.json        # Danh sách plugin đăng ký
+├── tools.json          # Danh mục tool khả dụng
+├── .env.example        # Mẫu biến môi trường
+└── README.md</pre>
+      </div>
+    </div>
+
+    <!-- TAB: quickstart -->
+    <div id="tab-quickstart" class="tab-panel hidden">
+      <div class="rounded-xl bg-black/60 border border-line overflow-hidden">
+        <div class="px-4 py-2 border-b border-line text-xs text-slate-500">terminal — quickstart</div>
+        <pre class="p-5 text-sm text-slate-300 overflow-x-auto leading-relaxed"><span class="text-slate-500"># 1. Clone</span>
+git clone https://github.com/zskbot/kio.ai.git
+cd kio.ai
+
+<span class="text-slate-500"># 2. Cấu hình môi trường</span>
+cp .env.example .env
+<span class="text-slate-500"># → điền API key, cổng chạy...</span>
+
+<span class="text-slate-500"># 3. Cài phụ thuộc</span>
+pip install -r requirements.txt
+
+<span class="text-slate-500"># 4. Khởi chạy server</span>
+python server.py
+<span class="text-mint"># → mở http://localhost:PORT</span></pre>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a href="https://github.com/zskbot/kio.ai" target="_blank" rel="noopener" class="px-5 py-3 rounded-lg bg-sky text-ink font-semibold hover:bg-sky/80 transition">⭐ Star on GitHub</a>
+      <a href="https://github.com/zskbot/kio.ai" target="_blank" rel="noopener" class="px-5 py-3 rounded-lg border border-line bg-panel hover:border-sky/50 hover:text-sky transition">Repo ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL -->
+<section id="terminal" class="py-24 border-t border-line/60 reveal">
+  <div class="max-w-3xl mx-auto px-6">
+    <p class="text-sky text-sm mb-2 tracking-widest uppercase">// demo <span class="text-slate-600">• 06</span></p>
+    <h2 class="text-3xl font-bold text-slate-50 mb-8">KIO.ai console</h2>
+    <div class="rounded-xl bg-black/60 border border-line overflow-hidden">
+      <div class="flex items-center gap-2 px-4 py-3 border-b border-line">
+        <span class="w-3 h-3 rounded-full bg-red-500/70"></span>
+        <span class="w-3 h-3 rounded-full bg-yellow-500/70"></span>
+        <span class="w-3 h-3 rounded-full bg-green-500/70"></span>
+        <span class="ml-2 text-xs text-slate-500">kio — agent console</span>
+      </div>
+      <div id="term-body" class="p-5 text-sm space-y-2 min-h-[220px]"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" class="py-24 border-t border-line/60 reveal">
+  <div class="max-w-6xl mx-auto px-6">
+    <p class="text-sky text-sm mb-2 tracking-widest uppercase">// writing <span class="text-slate-600">• 07</span></p>
+    <h2 class="text-3xl font-bold text-slate-50 mb-8">Bài viết</h2>
+    <div class="grid md:grid-cols-3 gap-5">
+      <a href="https://kio.ai" target="_blank" rel="noopener" class="card p-5 rounded-xl bg-panel border border-line block"><p class="text-xs text-sky mb-2">Agent · 2026</p><h4 class="text-slate-100 font-semibold mb-2">Thiết kế router chọn skill/tool cho AI coding agent</h4><p class="text-xs text-slate-400">Cách KIO.ai chấm điểm từ khoá để tự chọn công cụ phù hợp cho từng tác vụ.</p></a>
+      <a href="https://kio.ai" target="_blank" rel="noopener" class="card p-5 rounded-xl bg-panel border border-line block"><p class="text-xs text-violet mb-2">Agent · 2026</p><h4 class="text-slate-100 font-semibold mb-2">Lập kế hoạch thực thi cho tác nhân lập trình</h4><p class="text-xs text-slate-400">Phân tích → chọn skill/tool → quét workspace → build → validate → báo cáo.</p></a>
+      <a href="https://kio.ai" target="_blank" rel="noopener" class="card p-5 rounded-xl bg-panel border border-line block"><p class="text-xs text-mint mb-2">Open Source · 2025</p><h4 class="text-slate-100 font-semibold mb-2">Bộ sưu tập Claude Skills cho cộng đồng</h4><p class="text-xs text-slate-400">Tổng hợp skills, resources và tools để custom Claude Code workflow hiệu quả.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24 border-t border-line/60 reveal">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <p class="text-sky text-sm mb-2 tracking-widest uppercase">// contact <span class="text-slate-600">• 08</span></p>
+    <h2 class="text-3xl font-bold text-slate-50 mb-4">Kết nối với tôi</h2>
+    <p class="text-slate-400 mb-10 max-w-xl mx-auto">Mở repo, góp ý, hay cùng xây dựng tác nhân lập trình tốt hơn — mọi đóng góp đều được chào đón.</p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <a href="https://github.com/zskbot" target="_blank" rel="noopener" class="px-5 py-3 rounded-lg border border-line bg-panel hover:border-sky/50 hover:text-sky transition">GitHub</a>
+      <a href="https://kio.ai" target="_blank" rel="noopener" class="px-5 py-3 rounded-lg border border-line bg-panel hover:border-violet/50 hover:text-violet transition">kio.ai</a>
+      <a href="https://github.com/zskbot/kio.ai" target="_blank" rel="noopener" class="px-5 py-3 rounded-lg border border-line bg-panel hover:border-mint/50 hover:text-mint transition">KIO.ai repo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-line/60 py-8">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+    <p>© 2026 Huỳnh Thương · <span class="text-sky">zskbot</span></p>
+    <p class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span> status: active development</p>
+  </div>
+</footer>
+
+<script>
+// Terminal typing demo
+const lines = [
+  ['$', 'kio "build a landing page"', 'text-slate-500'],
+  ['→', 'router: selecting skills & tools...', 'text-sky'],
+  ['→', 'skills: frontend, project-analysis', 'text-violet'],
+  ['→', 'scanning workspace... done', 'text-mint'],
+  ['→', 'plan: 4 steps · executing...', 'text-pink'],
+  ['✓', 'build complete · report ready', 'text-slate-300'],
+];
+const body = document.getElementById('term-body');
+let li = 0, ci = 0, cur = null;
+function type(){
+  if(!cur){
+    if(li >= lines.length){ return; }
+    cur = document.createElement('p');
+    cur.className = lines[li][2];
+    body.appendChild(cur); ci = 0;
+  }
+  const prefix = lines[li][0], text = lines[li][1];
+  cur.textContent = prefix + ' ' + text.slice(0, ci++);
+  if(ci <= text.length){ setTimeout(type, 28); }
+  else { li++; cur = null; setTimeout(type, 260); }
+}
+setTimeout(type, 600);
+
+// Hero typing
+const heroPhrases = [
+  '> whoami: builder of autonomous coding agents',
+  '> status: pushing KIO.ai · active development',
+  '> kotlin: python · agents · open source',
+];
+let hp = 0, hc = 0, deleting = false;
+const typeLine = document.getElementById('typeLine');
+function heroType(){
+  const phrase = heroPhrases[hp];
+  typeLine.textContent = phrase.slice(0, hc);
+  if(!deleting && hc < phrase.length){ hc++; setTimeout(heroType, 45); }
+  else if(!deleting){ deleting = true; setTimeout(heroType, 1800); }
+  else if(hc > 0){ hc--; setTimeout(heroType, 20); }
+  else { deleting = false; hp = (hp+1) % heroPhrases.length; setTimeout(heroType, 300); }
+}
+setTimeout(heroType, 1500);
+
+// Sub-tabs
+const tabBtns = document.querySelectorAll('.tab-btn');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+    document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
+  });
+});
+tabBtns[0].classList.add('active');
+
+// Mobile menu
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+// Scroll reveal + active nav + skill bars
+const revealEls = document.querySelectorAll('.reveal');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = ['about','skills','experience','project','blog','contact'];
+const bars = document.querySelectorAll('.bar');
+let barsDone = false, revealDone = false;
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      if(!barsDone && e.target.id === 'skills'){
+        bars.forEach(b => { b.style.width = b.dataset.w; });
+        barsDone = true;
+      }
+    }
+  });
+}, { threshold: .12 });
+revealEls.forEach(el => io.observe(el));
+
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector('.nav-link[href="#'+e.target.id+'"]');
+      if(link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(id => { const el = document.getElementById(id); if(el) spy.observe(el); });
+</script>
+</body>
+</html>

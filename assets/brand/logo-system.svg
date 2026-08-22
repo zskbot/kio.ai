@@ -1,0 +1,39 @@
+<svg width="680" height="300" viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg">
+<rect width="680" height="300" fill="#0A0E17"/>
+<defs>
+<linearGradient id="kg2" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#85B7EB"/>
+<stop offset="100%" stop-color="#0C447C"/>
+</linearGradient>
+</defs>
+<text x="40" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Logo bieu tuong</text>
+<g transform="translate(40,50)">
+<rect width="120" height="90" rx="10" fill="#111827" stroke="#2C2C2A"/>
+<path d="M45 20 L45 70 L52 70 L52 50 L67 70 L78 70 L60 47 L76 20 L67 20 L52 42 L52 20 Z" fill="url(#kg2)" transform="scale(0.9) translate(5,3)"/>
+</g>
+<g transform="translate(180,50)">
+<rect width="120" height="90" rx="10" fill="#0C447C"/>
+<path d="M45 20 L45 70 L52 70 L52 50 L67 70 L78 70 L60 47 L76 20 L67 20 L52 42 L52 20 Z" fill="#042C53" transform="scale(0.9) translate(5,3)"/>
+</g>
+<g transform="translate(320,50)">
+<circle cx="60" cy="45" r="45" fill="#111827" stroke="#2C2C2A"/>
+<path d="M45 20 L45 70 L52 70 L52 50 L67 70 L78 70 L60 47 L76 20 L67 20 L52 42 L52 20 Z" fill="url(#kg2)" transform="scale(0.9) translate(5,3)"/>
+</g>
+<g transform="translate(460,50)">
+<rect width="120" height="90" rx="10" fill="#0C447C"/>
+<path d="M45 20 L45 70 L52 70 L52 50 L67 70 L78 70 L60 47 L76 20 L67 20 L52 42 L52 20 Z" fill="#E6F1FB" transform="scale(0.9) translate(5,3)"/>
+</g>
+<text x="40" y="180" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Logo chu</text>
+<g transform="translate(40,195)">
+<rect width="180" height="60" rx="10" fill="#111827" stroke="#2C2C2A"/>
+<text x="90" y="38" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#FFFFFF">KIO AI</text>
+</g>
+<g transform="translate(250,195)">
+<rect width="180" height="60" rx="10" fill="#E6F1FB"/>
+<text x="90" y="38" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#042C53">KIO AI</text>
+</g>
+<g transform="translate(460,195)">
+<rect width="180" height="60" rx="10" fill="#0C447C"/>
+<text x="90" y="38" font-family="Arial, sans-serif" font-size="20" font-weight="700" text-anchor="middle" fill="#E6F1FB">KIO AI</text>
+</g>
+</svg>
